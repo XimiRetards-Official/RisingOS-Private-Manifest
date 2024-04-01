@@ -30,6 +30,7 @@
   <remove-project path="bootable/recovery" />
   <remove-project path="build/make" />
   <remove-project path="build/soong" />
+  <remove-project path="device/lineage/sepolicy" />
   <remove-project path="frameworks/av" />
   <remove-project path="frameworks/base" />
   <remove-project path="frameworks/native" />
@@ -79,6 +80,9 @@
     <linkfile dest="Android.bp" src="root.bp" />
     <linkfile dest="bootstrap.bash" src="bootstrap.bash" />
   </project>
+
+  <!-- Device  -->
+  <project path="device/lineage/sepolicy" name="android_device_lineage_sepolicy" remote="staging" />
 
   <!-- Frameworks  -->
   <project path="frameworks/av" name="android_frameworks_av" groups="pdk-cw-fs,pdk-fs" remote="staging" />
