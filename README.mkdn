@@ -6,15 +6,19 @@ What is RisingOS?
 ---------------
 risingOS is a OpenSource Aftermarket Android Operating System that aims to bring unique and fresh user experience.
 
+Base Firmware
+---------------
+[**crDroid Android**](https://github.com/crdroidandroid)
+
 Maintainership
 ---------------
-We're short in manpower right now. Maintainership is closed until further notice.
+We're short in manpower right now (core members are busy with maintaining source and can't review applicants). Maintainership is closed until source workload is low.
  
 Getting Started
 ---------------
-**Initialize local repository (thanks to apon77 for repo init script)**
+**Initialize local repository**
 ```bash
-repo init -u https://github.com/RisingTechOSS/android -b fourteen --git-lfs
+repo init -u https://github.com/RisingOS-staging/android -b fourteen --git-lfs
 ```
 
 **Sync up with this command:**
@@ -31,33 +35,41 @@ rm -rf vendor/gms
 rm -rf .repo/projects/vendor/gms.git
 rm -rf .repo/project-objects/*/android_vendor_gms.git
 
-repo init --depth=1 --no-repo-verify -u https://github.com/RisingOS-staging/android -b fourteen --git-lfs -g default,-mips,-darwin,-notdefault
+repo init -u https://github.com/risingos-staging/android -b fourteen --git-lfs
 
 ```
 
-Preparing device for this ROM
+Preparing device for building risingOS
 ---------------
 **Inherit RisingOS vendor common stuffs - this inherits LineageOS' common_full_phone.mk**
 ```bash
 $(call inherit-product, vendor/rising/config/rising.mk)
 ```
+**Example device tree bringup**
+---------------
+[**oriole bringup for risingOS**](https://github.com/minaripenguin/android_device_google_raviole/commit/01e644c801bbf81b54b5d85cbf3d418935f37a20)
 
-Build Flags
+Building Flags
 ---------------
 ```bash
-# chipset flag enclose var with "" if more than one
-# friendly tip: builders can use init_xxx.cpp as workaround for spacing
+# friendly tip: builders can use vendor init_xxx.cpp as workaround for spacing
 # e.g. property_override("ro.rising.chipset", "Snapdragon 870 5G");
-RISING_CHIPSET := "snapdragon_x"
+RISING_CHIPSET="Google Tensor 2"
 
-# chipset flag enclose var with "" if more than one
-# friendly tip: builders can use init_xxx.cpp as workaround for spacing
+# friendly tip: builders can use vendor init_xxx.cpp as workaround for spacing
 # e.g. property_override("ro.rising.maintainer", "maintainer");
-RISING_MAINTAINER := "Niv"
+RISING_MAINTAINER="Niv"
+
+#In rising_<device>.mk Add the following properties to `PRODUCT_BUILD_PROP_OVERRIDES`
+
+example:
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    RISING_CHIPSET="Google Tensor 2" \
+    RISING_MAINTAINER="Niv"
 
 # chipset flag enclose var with "" if more than one
 # this will reflect on build/display version, a firmware package/zip name 
-# e.g. risingOS-7.0-COMMUNITY-device-AOSP.zip - AOSP is the default package type, WITH_GMS will override the package type to PIXEL
+# e.g. risingOS-2.1-COMMUNITY-device-AOSP.zip - AOSP is the default package type, WITH_GMS will override the package type to PIXEL
 RISING_PACKAGE_TYPE := "VANILLA_AOSP"
 
 # disable/enable blur support, default is false
@@ -71,38 +83,42 @@ GMS Flags
 WITH_GMS := true/false - ship with GMS packages, replaces misc AOSP packages with Google packages.
 ```
 
-Build
+Building the firmware
 ---------------
-**Set up environment**
+**Setting up environment**
 ```bash
 . build/envsetup.sh
 ```
-
-**Build the code**
-```bash
-riseup "device_codename" userdebug/user
-```
-
-**Purge out directories**
-```bash
-purge
-```
-
 **riseup uses all available cores to assign jobs hence making -jX no-op, to utilize -jX use:**
 ```bash
-lunch rising_device-userdebug/user or riseup device userdebug/user
+riseup <device> <build-type> 
 ```
 ```bash
-m -jX or ascend
+rise
 ```
 
 **Building fastboot update package**
 ```bash
-riseup device userdebug/user
+riseup <device> <build-type> 
 ```
 ```bash
-make updatepackage or ascend fastboot
+rise fb
 ```
+
+**For more information about the rise build command:**
+```bash
+rise help
+```
+
+Bug Reports/Issue Tracker
+---------------
+[**Issue Tracker**](https://github.com/RisingTechOSS/issue_tracker)
+
+Contributions/Translations
+---------------
+Contributions/Translations are always welcome! Please feel free to do pull requests!
+
+Pull requests will be reviewed by source maintainers and will be merged/added to work-in-progress repositories once changes are verified.
 
 
 Credits
