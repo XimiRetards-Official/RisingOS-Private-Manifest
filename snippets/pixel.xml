@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
 
-  <remote name="mnri"
-          fetch="https://github.com/minaripenguin/"
-          sync-c="true"
-          sync-j="4"
-          revision="refs/heads/fourteen" />
-
   <!-- Pixel 6/6 Pro -->
   <remote name="aosp-raviole" fetch="https://android.googlesource.com" review="android-review.googlesource.com" revision="refs/tags/android-14.0.0_r29" clone-depth="1" />
   <!-- Pixel 6a -->
@@ -23,19 +17,5 @@
 
   <!-- Pixel 8/8 Pro -->
   <remote name="aosp-shusky" fetch="https://android.googlesource.com" review="android-review.googlesource.com" revision="refs/tags/android-14.0.0_r29" clone-depth="1" />
-
-  <remove-project path="hardware/google/graphics/common" />
-  <remove-project path="hardware/google/pixel-sepolicy" />
-
-  <!-- GS101/GS201 -->
-  <project path="device/google/raviole" name="android_device_google_raviole" remote="mnri" groups="device,slider,pdk-gs-arm" />
-  <project path="device/google/gs101" name="android_device_google_gs101" remote="mnri" groups="device,slider,bluejay,pdk-gs-arm" />
-  <project path="vendor/google/oriole" name="android_vendor_google_devices_oriole" remote="mnri" groups="device,slider,bluejay,pdk-gs-arm" />
-
-  <project path="hardware/google/graphics/common" name="android_hardware_google_graphics_common" groups="generic_fs,pixel" remote="mnri"/>
-  <project path="hardware/google/pixel-sepolicy" name="android_hardware_google_pixel-sepolicy" groups="generic_fs,pixel" remote="mnri" />
-
-  <project path="device/google/gs-common" name="device/google/gs-common" groups="device,slider,bluejay,pdk-gs-arm" remote="aosp" />
-  <project path="device/google/raviole-kernel" name="device/google/raviole-kernel" remote="aosp-raviole" revision="refs/tags/android-14.0.0_r29" clone-depth="1" />
 
 </manifest>
