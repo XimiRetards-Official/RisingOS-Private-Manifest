@@ -2,13 +2,13 @@
 <manifest>
 
   <remote name="staging"
-          fetch="https://github.com/RisingOS-staging/"
+          fetch="ssh://git@github.com/RisingOS-staging/"
           sync-c="true"
           sync-j="4"
           revision="refs/heads/fourteen" />
 
   <remote name="rising"
-          fetch="https://github.com/RisingTechOSS/"
+          fetch="ssh://git@github.com/RisingTechOSS/"
           sync-c="true"
           sync-j="4"
           revision="refs/heads/fourteen" />
